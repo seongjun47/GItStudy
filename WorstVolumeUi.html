@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최악의 볼륨 UI - 1/10 Edition</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e0e0e0;
+            font-family: "Malgun Gothic", sans-serif;
+        }
+        .volume-card {
+            background: #f3f3f3;
+            padding: 15px 25px;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        .title {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        /* 핵심: 1/10로 축소된 슬라이더 너비 */
+        input[type=range] {
+            width: 25px; 
+            margin: 0;
+            cursor: crosshair;
+        }
+        .volume-value {
+            font-size: 28px;
+            min-width: 45px;
+            text-align: right;
+            margin-left: auto;
+        }
+        .icon { font-size: 18px; }
+    </style>
+</head>
+<body>
+
+<div class="volume-card">
+    <div class="title">스피커(Realtek(R) Audio)</div>
+    <div class="slider-container">
+        <span class="icon">🔊</span>
+        <input type="range" id="badSlider" min="0" max="100" value="0">
+        <div class="volume-value" id="val">0</div>
+    </div>
+</div>
+
+<script>
+    const slider = document.getElementById('badSlider');
+    const valDisplay = document.getElementById('val');
+
+    slider.addEventListener('input', (e) => {
+        valDisplay.textContent = e.target.value;
+        
+        // 추가적인 '악마적' 디테일: 
+        // 볼륨이 100에 가까워질수록 마우스 조작이 더 민감해지게 하거나 
+        // 특정 숫자(예: 44)에는 절대 멈추지 않게 로직을 짤 수도 있습니다.
+    });
+</script>
+
+</body>
+</html>
